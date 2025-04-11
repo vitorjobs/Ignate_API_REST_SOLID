@@ -53,6 +53,7 @@ Aqui estão os próximos passos planejados para o projeto:
 - ⚡ **[Fastify](https://www.fastify.io/)** ^5.2.2 - Framework web rápido e leve
 - 🛠️ **[Zod](https://zod.dev/)** 3.24.2 - Validação de dados com TypeScript-first schema validation
 - ⚙️ **[Dotenv](https://github.com/motdotla/dotenv)** 16.4.7 - Gerenciamento de variáveis de ambiente
+- 🗄️ **[Prisma Client](https://www.prisma.io/)** 6.6.0 - ORM typesafe para banco de dados
 
 ### Dev Dependencies
 - 🔁 **[TSX](https://github.com/esbuild-kit/tsx)** 4.19.3 - Execução direta de TypeScript
@@ -61,6 +62,7 @@ Aqui estão os próximos passos planejados para o projeto:
 - 🎨 **[@rocketseat/eslint-config](https://github.com/Rocketseat/eslint-config-rocketseat)** 2.2.2 - Configuração de ESLint
 - 📝 **[TypeScript](https://www.typescriptlang.org/)** 5.8.3 - Superset JavaScript com tipagem
 - 🏷️ **[@types/node](https://www.npmjs.com/package/@types/node)** 22.14.0 - Tipos para Node.js
+- 🛠️ **[Prisma](https://www.prisma.io/)** 6.6.0 - Ferramenta CLI para migrações e geração do client
 
 <!-- 
 ## 🛠️ Tecnologias & Ferramentas
@@ -86,6 +88,40 @@ Aqui estão os próximos passos planejados para o projeto:
 
 ---
 
+## 📂 Estrutura do Projeto
+
+```text
+PROJETO/
+│
+├── 📁 build/                  # Builds compilados para produção
+├── 📁 node_modules/           # Dependências instaladas
+├── 📁 prisma/                 
+│   └── 📄 schema.prisma       # Modelos de dados e configuração do DB
+├── 📁 src/                    # Código fonte principal
+├── 📁 env/                    # Configurações de ambiente
+│
+├── 📄 app.ts                  # Configuração principal do app
+├── 📄 server.ts               # Ponto de entrada do servidor
+│
+├── 📄 .editorconfig           # Padronização entre editores
+├── 📄 .env                    # Variáveis locais (não versionado)
+├── 📄 .env.example            # Template de variáveis de ambiente
+│
+├── 📄 .eslintignore           # Exceções do ESLint
+├── 📄 .eslintrc.json          # Regras de linting
+├── 📄 eslint.config.mjs       # Config ESLint (ES Modules)
+│
+├── 📄 .gitignore              # Arquivos ignorados pelo Git
+├── 📄 .npmrc                  # Configurações do NPM
+├── 📁 .comandos/              # Scripts e comandos úteis
+│
+├── 📄 package.json            # Configuração do projeto
+├── 📄 package-lock.json       # Lock de dependências
+├── 📄 tsconfig.json           # Configuração TypeScript
+└── 📄 README.md               # Documentação principal
+
+---
+```
 ## 🚀 Como executar
 
 1. Clone o repositório:
@@ -113,3 +149,6 @@ Aqui estão os próximos passos planejados para o projeto:
 6. Acesse via brouser ou Postman: 
    ```bash
    http://localhost:3333
+
+
+
