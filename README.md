@@ -54,6 +54,7 @@ Aqui estão os próximos passos planejados para o projeto:
 - 🛠️ **[Zod](https://zod.dev/)** 3.24.2 - Validação de dados com TypeScript-first schema validation
 - ⚙️ **[Dotenv](https://github.com/motdotla/dotenv)** 16.4.7 - Gerenciamento de variáveis de ambiente
 - 🗄️ **[Prisma Client](https://www.prisma.io/)** 6.6.0 - ORM typesafe para banco de dados
+- 🔐 **[bcryptjs](https://github.com/dcodeIO/bcrypt.js)** 2.4.3 - Hash seguro de senhas
 
 ### Dev Dependencies
 - 🔁 **[TSX](https://github.com/esbuild-kit/tsx)** 4.19.3 - Execução direta de TypeScript
