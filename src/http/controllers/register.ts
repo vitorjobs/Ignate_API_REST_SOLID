@@ -1,7 +1,7 @@
-import { prisma } from "lib/prisma"
 import { z } from "zod"
 import {FastifyRequest, FastifyReply} from "fastify"
-import { hash } from "bcryptjs"
+import { RegisterUseCase } from "use-cases/register"
+import { PrismaUsersRepository } from "repositories/prisma/prisma-users-repository"
 
 export async function register(request: FastifyRequest, reply: FastifyReply) {
 	const registerBodySchema = z.object({
@@ -13,20 +13,17 @@ export async function register(request: FastifyRequest, reply: FastifyReply) {
 	// Extrai dados do corpo da requisição e valida os campos usando um schema Zod pré-definido)
 	const {name, email, password} = registerBodySchema.parse(request.body)
 
-  const password_hash = await hash(password, 6)
-
-
 	try {
-		await prisma.user.create({
-			data:{
-				name,
-				email,
-				password_hash
-			}
+		const usersRepository = new PrismaUsersRepository()
+		const registerUseCase	= new RegisterUseCase(usersRepository)
+		
+		await registerUseCase.execute({
+			name, 
+			email,
+			password
 		})
-		return reply.status(201).send()
-	} catch (error) {
-		return error
+	} catch (err) {
+		return	reply.status(409).send(err)
 	}
-
+	return reply.status(201).send()
 }
