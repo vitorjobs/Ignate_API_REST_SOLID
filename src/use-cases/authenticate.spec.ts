@@ -1,17 +1,30 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { expect, describe, it, test } from 'vitest'
+
+import { expect, describe, it, beforeEach } from 'vitest'
 import { InMemoryUsersRepository } from 'repositories/in-memory/in-memory-user-repository'
 import { AuthenticateUseCase } from './authenticate'
 import { InvalidCredentialsError } from './errors/invalid-credentials-erros'
-import { compare, hash } from 'bcryptjs'
+import { hash } from 'bcryptjs'
+import { InvalidTypeTextError } from './errors/invalid-type-text'
 
 describe('Authenticate Use Case', () => {
+  let usersRepository: InMemoryUsersRepository
+  let sut: AuthenticateUseCase
+  const emailInvalid = [
+    null,
+    undefined,
+    12345,
+    true,
+    {},
+    []
+  ]
+
+  beforeEach(() => {
+    usersRepository = new InMemoryUsersRepository()
+    sut = new AuthenticateUseCase(usersRepository)
+
+  })
 
   it('should be able to authenticate', async () => {
-
-    const usersRepository = new InMemoryUsersRepository()
-    const sut = new AuthenticateUseCase(usersRepository)
-
     await usersRepository.create({
       name: "Vítor Guedes",
       email: "vitor@teste01",
@@ -23,78 +36,63 @@ describe('Authenticate Use Case', () => {
       password: "123456"
     })
 
-    await expect(user.email).toEqual(expect.any(String))
-
+    expect(user.email).toEqual("vitor@teste01")
   })
 
-  it('Não pode autenticar com o email incorreto', async () => {
-
-    const usersRepository = new InMemoryUsersRepository()
-    const sut = new AuthenticateUseCase(usersRepository)
-
+  it('should not authenticate with wrong email', async () => {
     await usersRepository.create({
       name: "Vítor Guedes",
       email: "vitor@teste01",
       password_hash: await hash('123456', 6)
     })
 
-    expect(() =>
+    await expect(() =>
       sut.execute({
-        email: "vitor@teste0",
+        email: "wrong@email.com",
         password: "123456"
       })
     ).rejects.toBeInstanceOf(InvalidCredentialsError)
   })
 
-  it.skip('should not receive the empty email', async () => {
-
-    const usersRepository = new InMemoryUsersRepository()
-    const sut = new AuthenticateUseCase(usersRepository)
+  it.skip('should not authenticate with wrong password', async () => {
+    await usersRepository.create({
+      name: "Vítor Guedes",
+      email: "vitor@teste01",
+      password_hash: await hash("123456", 6)
+    })
 
     await expect(() =>
       sut.execute({
-        email: '', // email vazio
-        password: '123456'
+        email: "vitor@teste01",
+        password: "123458"
       })
     ).rejects.toBeInstanceOf(InvalidCredentialsError)
-
   })
 
-  it.skip('should not receive the empty password', async () => {
+  it('should not authenticate with non-string email', async () => {
+    await expect(() =>
+      sut.execute({
+        email: '',
+        password: '123456',
+      })
+    ).rejects.toBeInstanceOf(InvalidCredentialsError)
+  })
 
-    const usersRepository = new InMemoryUsersRepository()
-    const sut = new AuthenticateUseCase(usersRepository)
-
+  it('should not authenticate with empty password', async () => {
     await expect(() =>
       sut.execute({
         email: "vitor@teste01",
         password: ''
       })
     ).rejects.toBeInstanceOf(InvalidCredentialsError)
-
   })
 
-  it.skip('should not be able to authenticate with wrong password', async () => {
-
-    const usersRepository = new InMemoryUsersRepository()
-    const sut = new AuthenticateUseCase(usersRepository)
-
-    const { user } = await sut.execute({
-      email: "vitor@teste01",
-      password: "123456"
-    })
-
-    const isPassWordCorrectlyHashed = await compare(
-      '123458',
-      user.password_hash
-    )
-
+  it('should not authenticate with type text incorrecty', async () => {
     await expect(() =>
       sut.execute({
-        email: "vitor@teste01",
-        password: user.password_hash
+        email: emailInvalid,
+        password: '123456'
       })
-    ).rejects.toBeInstanceOf(InvalidCredentialsError)
-
+    ).rejects.toBeInstanceOf(InvalidTypeTextError)
   })
 })
