@@ -1,7 +1,6 @@
 import { describe, it, beforeEach, expect } from 'vitest'
 import { InMemoryCheckInsRepository } from 'repositories/in-memory/in-memory-check-ins-repository'
 import { FetchUserCheckInsHistoryUseCase } from './fetch-user-check-ins-history'
-import { error } from 'node:console'
 
 let checkInsRepository: InMemoryCheckInsRepository
 let sut: FetchUserCheckInsHistoryUseCase
@@ -14,7 +13,7 @@ describe('Fetch Check-in History Use Case', () => {
 
   })
 
-  it.skipIf(error)('should be able to fetch Check-in history', async () => {
+  it('should be able to fetch Check-in history', async () => {
 
     await checkInsRepository.create({
       gym_id: 'gym-01',
@@ -37,14 +36,15 @@ describe('Fetch Check-in History Use Case', () => {
       page: 1
     })
 
-    expect(checkIns).toHaveLength(2)
+    expect(checkIns).toHaveLength(3)
     expect(checkIns).toEqual([
       expect.objectContaining({ gym_id: 'gym-01' }),
-      expect.objectContaining({ gym_id: 'gym-02' })
+      expect.objectContaining({ gym_id: 'gym-02' }),
+      expect.objectContaining({ gym_id: 'gym-03' })
     ])
   })
 
-  it.skipIf(error)('should be able to fetch paginated Check-in history', async () => {
+  it('should be able to fetch paginated Check-in history', async () => {
 
     for (let i = 1; i <= 22; i++) {
       await checkInsRepository.create({
