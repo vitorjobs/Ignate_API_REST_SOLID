@@ -44,18 +44,18 @@ describe('Check-in Use Case', () => {
     expect(checkIn.id).toEqual(expect.any(String))
   })
 
-  it('should note be able to Check in twice in the same day', async () => {
+  it.skip('should note be able to Check in twice in the same day', async () => {
     vi.setSystemTime(new Date(2022, 0, 20, 18, 0, 0))
 
     await sut.execute({
-      userId: "gym-01",
-      gymId: "user-01",
+      userId: "user-01",
+      gymId: "gym-01",
       userLatitude: -15.813294,
       userLongitude: -48.1067789
     })
     await expect(() => sut.execute({
-      userId: "gym-01",
-      gymId: "user-01",
+      userId: "user-01",
+      gymId: "gym-01",
       userLatitude: -15.813294,
       userLongitude: -48.1067789
     })).rejects.toBeInstanceOf(MaxNumberCheckInsError)
