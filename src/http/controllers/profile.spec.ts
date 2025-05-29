@@ -62,31 +62,4 @@ describe('Profile (e2e)', () => {
       message: 'Unauthorized.'
     })
   })
-
-
-  // it('0000000', async () => {
-  //   await request(app.server)
-  //     .post('/users')
-  //     .send({
-  //       name: 'Jhon Doe',
-  //       email: 'jhondoe@example.com',
-  //       password: '123456'
-  //     })
-
-  //   await request(app.server)
-  //     .post('/sessions')
-  //     .send({
-  //       email: 'jhondoe@example.com',
-  //       password: '123456'
-  //     })
-
-  //   // const { token } = authResponse.body
-
-  //   const profileResponse = await request(app.server)
-  //     .get('/me')
-  //   // .set('Authorization', `Bearer ${token}`)
-
-  //   // expect(profileResponse.statusCode).toEqual(401)
-
-  // })
 })
