@@ -1,7 +1,9 @@
 import fastifyJwt from "@fastify/jwt";
 import { env } from "env";
 import fastify from "fastify";
-import { appRoutes } from "http/controllers/users/routes";
+import { gymsRoutes } from "http/controllers/gyms/routes";
+import { usersRoutes } from "http/controllers/users/routes";
+import { appRoutes } from "http/routes";
 import { ZodError } from "zod";
 
 export const app = fastify()
@@ -22,8 +24,9 @@ app.get('/about', () => {
 // ROTA USER
 // * Validação com a biblioteca ZOD para checar os tipos e valores dos dados.
 
+app.register(usersRoutes)
+app.register(gymsRoutes)
 app.register(appRoutes)
-
 // FUNÇÃO GLOBAL PARA TARTAR ERROS NA APLICAÇÃO
 
 app.setErrorHandler((error, _request, reply) => {
