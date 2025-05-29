@@ -1,5 +1,8 @@
 import { FastifyInstance } from "fastify";
 import { verifyJwt } from "http/middlewares/verify-jwt";
+import { search } from "./search";
+import { nearby } from "./nearby";
+import { create } from "domain";
 
 export async function gymsRoutes(app: FastifyInstance) {
   // VERIFY JWT MIDDLEWARE
@@ -13,5 +16,8 @@ export async function gymsRoutes(app: FastifyInstance) {
   // This ensures that the middleware is executed for every request to the gym routes.
   app.addHook('onRequest', verifyJwt)
 
+  app.post('gyms', create)
+  app.get('/gyms/nearby', nearby)
+  app.get('/gyms/search', search)
 
 }
