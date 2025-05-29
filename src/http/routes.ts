@@ -1,16 +1,8 @@
 import { FastifyInstance } from "fastify";
-import { register } from "./controllers/users/register";
-import { profile } from "./controllers/users/profile";
-// import { healthcheck } from "./healthcheck/health";
-import { authenticate } from "./controllers/users/authenticate";
-import { verifyJwt } from "./middlewares/verify-jwt";
+import { healthcheck } from "./healthcheck/health";
 
 export async function appRoutes(app: FastifyInstance) {
-
-  // app.get('/health', healthcheck)
+  app.get('/health', healthcheck)
   app.get("/timestamp", (req, res) => res.send(Date.now().toString()));
 
-  app.post('/sessions', authenticate)
-  app.post('/users', register)
-  app.get('/me', { onRequest: [verifyJwt] }, profile)
 }
