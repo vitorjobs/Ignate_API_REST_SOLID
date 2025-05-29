@@ -12,7 +12,7 @@ export async function search(request: FastifyRequest, reply: FastifyReply) {
 	// Extrai dados do corpo da requisição e valida os campos usando um schema Zod pré-definido)
 	const {
 		query, page
-	} = searchGymsQuerySchema.parse(request.body)
+	} = searchGymsQuerySchema.parse(request.headers)
 
 	const registerUseCase = makeSearchGymsUseCase()
 

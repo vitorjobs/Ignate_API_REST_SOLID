@@ -16,7 +16,7 @@ export async function gymsRoutes(app: FastifyInstance) {
   // This ensures that the middleware is executed for every request to the gym routes.
   app.addHook('onRequest', verifyJwt)
 
-  app.post('gyms', create)
+  app.post('/gyms', create)
   app.get('/gyms/nearby', nearby)
   app.get('/gyms/search', search)
 
