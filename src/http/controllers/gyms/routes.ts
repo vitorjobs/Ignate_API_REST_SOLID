@@ -3,6 +3,7 @@ import { verifyJwt } from "http/middlewares/verify-jwt";
 import { search } from "./search";
 import { nearby } from "./nearby";
 import { create } from "./create";
+import { verifyUserRole } from "http/middlewares/verify-user-role";
 
 export async function gymsRoutes(app: FastifyInstance) {
   // VERIFY JWT MIDDLEWARE
@@ -16,7 +17,11 @@ export async function gymsRoutes(app: FastifyInstance) {
   // This ensures that the middleware is executed for every request to the gym routes.
   app.addHook('onRequest', verifyJwt)
 
-  app.post('/gyms', create)
+  app.post('/gyms', {
+    onRequest:
+      [verifyUserRole('ADMIN')]
+  }, create)
+
   app.get('/gyms/nearby', nearby)
   app.get('/gyms/search', search)
 
