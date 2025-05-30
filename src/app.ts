@@ -1,6 +1,7 @@
 import fastifyJwt from "@fastify/jwt";
 import { env } from "env";
 import fastify from "fastify";
+import { checkInsRoutes } from "http/controllers/check-ins/routes";
 import { gymsRoutes } from "http/controllers/gyms/routes";
 import { usersRoutes } from "http/controllers/users/routes";
 import { appRoutes } from "http/routes";
@@ -26,6 +27,7 @@ app.get('/about', () => {
 
 app.register(usersRoutes)
 app.register(gymsRoutes)
+app.register(checkInsRoutes)
 app.register(appRoutes)
 // FUNÇÃO GLOBAL PARA TARTAR ERROS NA APLICAÇÃO
 
