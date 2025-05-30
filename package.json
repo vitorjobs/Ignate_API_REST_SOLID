@@ -8,6 +8,7 @@
     "build": "tsup src --out-dir build",
     "start": "node build/server.cjs",
     "test": "vitest run --project unit",
+    "test:all": "vitest run",
     "test:e2e": "vitest run --project e2e",
     "test:watch": "vitest --project unit",
     "test:watch:e2e": "vitest --project e2e",

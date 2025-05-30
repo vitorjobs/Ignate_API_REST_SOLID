@@ -4,6 +4,5 @@ build
 README.md
 comandos
 anotacoes/
-src/http/healthcheck/health.ts
 coverage
 .vscode
