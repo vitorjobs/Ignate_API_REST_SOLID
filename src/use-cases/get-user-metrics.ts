@@ -18,7 +18,7 @@ export class GetUserMetricsUseCase {
     userId,
   }: GetUserMetricsUseCaseRequest): Promise<GetUserMetricsUseCaseResponse> {
 
-    const checkInsCount = await this.checkInsRepository.countByUseId(userId)
+    const checkInsCount = await this.checkInsRepository.countByUserId(userId)
 
     return {
       checkInsCount
