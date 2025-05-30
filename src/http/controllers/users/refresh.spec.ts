@@ -38,7 +38,7 @@ describe('Refresh Token (e2e)', () => {
     //     expect.arrayContaining([expect.stringContaining('refreshToken=')]),
     //   )
     // } else {
-    //   throw new Error('No cookies received, unable to test token refresh')
+    //   throw new Error('No cookies received, unable to test toGITken refresh')
     // }
     const authResponse = await request(app.server).post('/sessions').send({
       email: 'johndoe@example.com',
