@@ -43,7 +43,15 @@ app.get('/about', () => {
 	return {
 		Projeto: "🚀 SOLID API - Conceitos e Pratica",
 		Tecnologias: "✨ Plataforma Node | Liguagem Javascript | Bibliotecas",
-		Documentação: "🎯 Criada via SWAGGER"
+		Documentação: "🎯 Criada via SWAGGER",
+		Dependencies: {
+			fastify: '4.0.0',
+			prisma: '3.0.0',
+			bcryptjs: '2.4.3',
+			env: env.NODE_ENV || 'development',
+			supertest: '6.1.6',
+			vitest: '0.0.1',
+		},
 	}
 })
 
