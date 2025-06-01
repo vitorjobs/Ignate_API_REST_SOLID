@@ -24,13 +24,13 @@ Este projeto é uma **API RESTful** construída com **Fastify** e estruturada co
 
 Os princípios do SOLID são pilares fundamentais para garantir que o código seja **escalável**, **manutenível** e **de fácil leitura**. Eles foram implementados ao longo da arquitetura desta API.
 
-| Letra | Princípio                         | Descrição                                                                 |
-|-------|-----------------------------------|---------------------------------------------------------------------------|
-| **S** | Single Responsibility Principle   | Cada classe deve ter uma única responsabilidade.                         |
-| **O** | Open/Closed Principle             | O código deve estar aberto para extensão, mas fechado para modificação. |
-| **L** | Liskov Substitution Principle     | Subtipos devem poder substituir seus tipos base sem quebrar o sistema.  |
-| **I** | Interface Segregation Principle   | Muitas interfaces específicas são melhores que uma geral.               |
-| **D** | Dependency Inversion Principle    | Dependa de abstrações, não de implementações concretas.                |
+| Letra | Princípio                       | Descrição                                                               |
+| ----- | ------------------------------- | ----------------------------------------------------------------------- |
+| **S** | Single Responsibility Principle | Cada classe deve ter uma única responsabilidade.                        |
+| **O** | Open/Closed Principle           | O código deve estar aberto para extensão, mas fechado para modificação. |
+| **L** | Liskov Substitution Principle   | Subtipos devem poder substituir seus tipos base sem quebrar o sistema.  |
+| **I** | Interface Segregation Principle | Muitas interfaces específicas são melhores que uma geral.               |
+| **D** | Dependency Inversion Principle  | Dependa de abstrações, não de implementações concretas.                 |
 
 ---
 
@@ -38,8 +38,8 @@ Os princípios do SOLID são pilares fundamentais para garantir que o código se
 
 Aqui estão os próximos passos planejados para o projeto:
 
-- [ ] 🧪 **Criar testes unitários** — Garantir a estabilidade das funcionalidades com testes automatizados.
-- [ ] 🔐 **Implementar autenticação** — Adicionar fluxo de login, JWT e controle de acesso.
+- [ ] **Saídas de Erros melhoradas** - Melhorar o retorno dos erros nas controllers
+- [ ] 🧪 **Criar testes unitários dos UseCase e Controllers** — Garantir a estabilidade das funcionalidades com testes automatizados de todos os componentes.
 - [ ] 📄 **Documentar rotas com Swagger** — Disponibilizar documentação da API para facilitar testes e integração.
 - [ ] ☁️ **Deploy em ambiente de produção** — Subir a aplicação em uma infraestrutura estável (como Render, Vercel, EC2, etc).
 
@@ -65,26 +65,14 @@ Aqui estão os próximos passos planejados para o projeto:
 - 🏷️ **[@types/node](https://www.npmjs.com/package/@types/node)** 22.14.0 - Tipos para Node.js
 - 🛠️ **[Prisma](https://www.prisma.io/)** 6.6.0 - Ferramenta CLI para migrações e geração do client
 
-<!-- 
-## 🛠️ Tecnologias & Ferramentas
-
-- ⚡ **[Fastify](https://www.fastify.io/)** — Framework web rápido e leve para Node.js.
-- 🧠 **[SOLID](https://en.wikipedia.org/wiki/SOLID)** — Conjunto de princípios para arquitetura de software orientado a objetos.
-- 🛠️ **[TypeScript](https://www.typescriptlang.org/)** — Superset do JavaScript que adiciona tipagem estática.
-- 🔁 **[TSX](https://github.com/esbuild-kit/tsx)** — Executa arquivos TypeScript direto, sem necessidade de transpilar.
-- 📦 **[Tsup](https://tsup.egoist.dev/)** — Empacotador rápido baseado no esbuild, usado para build da aplicação. -->
-
----
-
-
 ---
 
 ## 🔃 Scripts disponíveis
 
 | Comando             | Descrição                                                                 |
-|---------------------|---------------------------------------------------------------------------|
-| `npm run start:dev` | Inicia em modo dev com hot-reload usando `tsx watch src/server.ts`       |
-| `npm run build`     | Compila o projeto para a pasta `build/` usando `tsup src --out-dir build`|
+| ------------------- | ------------------------------------------------------------------------- |
+| `npm run start:dev` | Inicia em modo dev com hot-reload usando `tsx watch src/server.ts`        |
+| `npm run build`     | Compila o projeto para a pasta `build/` usando `tsup src --out-dir build` |
 | `npm run start`     | Executa a versão compilada em produção (`node build/server.js`)           |
 
 ---
@@ -133,23 +121,35 @@ PROJETO/
 2. Configure as variáveis de ambiente:
    ```bash
    cp .env.example .env
+
+3. Inicie os containers do banco de dados e do SonarQuebe
+  ```bash
+    docker-compose up -d
    
-3. Instale as dependências:
+5. Instale as dependências:
    ```bash
    npm install
 
-4. Inicie o servidor em modo dev:
+4. Inicie a estrutura do banco de dados:
+   ```bash
+   npx prisma migrate dev
+
+6. Inicie o servidor em modo dev:
     ```bash
    npm run start:dev
 
-5. Para produção:
+7. Para produção:
    ```bash
    npm run build
    npm run start
    
-6. Acesse via brouser ou Postman: 
+8. Acesse a API via brouser ou Postman: 
    ```bash
    http://localhost:3333
+
+9. Acesse via brouser o sonarQube: 
+   ```bash
+   http://localhost:9000(ou porta reconfigurada no docker composer)
 
 
 
