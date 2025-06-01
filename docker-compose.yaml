@@ -1,7 +1,7 @@
-version: '3.8'
+version: '3'
 
 services:
-  api-solid-pg:
+  pg_apiSolid:
     image: bitnami/postgresql
     ports:
       - 5432:5432
@@ -9,3 +9,22 @@ services:
       - POSTGRESQL_USERNAME=docker
       - POSTGRESQL_PASSWORD=docker
       - POSTGRESQL_DATABASE=apisolid
+    restart: unless-stopped
+
+  SonarQube_apiSolid:
+    image: sonarqube:9.9.0-community
+    container_name: sonarqube_restApi
+    environment:
+      - SONAR_ES_BOOTSTRAP_CHECKS_DISABLE=true
+    ports:
+      - "9002:9000"
+    volumes:
+      - sonarqube_data:/opt/sonarqube/data
+      - sonarqube_extensions:/opt/sonarqube/extensions
+      - sonarqube_logs:/opt/sonarqube/logs
+    restart: unless-stopped
+
+volumes:
+  sonarqube_data:
+  sonarqube_extensions:
+  sonarqube_logs:
