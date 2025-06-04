@@ -5,11 +5,26 @@ import { profile } from "./profile";
 import { authenticate } from "./authenticate";
 import { verifyJwt } from "../../middlewares/verify-jwt";
 import { refresh } from "./refresh";
+// import { update } from "./update";
+// import { verifyUserRole } from "http/middlewares/verify-user-role";
+// import { deleted } from "./delete";
+import { getAll } from "./get-all";
+// import { listAdminUsers } from "./get-admin-users";
+
 
 export async function usersRoutes(app: FastifyInstance) {
   app.post('/sessions', authenticate)
   app.post('/users', register)
   app.get('/me', { onRequest: [verifyJwt] }, profile)
   app.patch('/token/refresh', refresh)
-
+  // app.patch('/users/role',
+  //   { onRequest: [verifyJwt, verifyUserRole('ADMIN')] },
+  //   update,
+  // )
+  // app.delete('/users/:userId',
+  //   { onRequest: [verifyJwt, verifyUserRole('ADMIN')] },
+  //   deleted,
+  // )
+  app.get('/users', { onRequest: [verifyJwt] }, getAll)
+  // app.get('/users/admin', { onRequest: [verifyJwt, verifyUserRole('ADMIN')] }, listAdminUsers)
 }
