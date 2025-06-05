@@ -7,5 +7,5 @@ export interface UsersRepository {
   updateRole(userId: string, role: Role): Promise<User>;
   delete(id: string): Promise<void>;
   findAll(): Promise<User[]>;
-  findByRoleAdmin(): Promise<User[]>;
+  findByRoleAdmin(): Promise<User[] | null>;
 }

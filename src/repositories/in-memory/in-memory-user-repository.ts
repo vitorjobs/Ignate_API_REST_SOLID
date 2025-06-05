@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { User, Prisma, Role } from "@prisma/client"
+import { error } from "console"
 import { UsersRepository } from "repositories/users-repository"
 
 export class InMemoryUsersRepository implements UsersRepository {
@@ -19,12 +20,18 @@ export class InMemoryUsersRepository implements UsersRepository {
 
   }
 
-  async findByRoleAdmin(): Promise<User[]> {
-    const users = this.items.find((item) => item.role === 'ADMIN')
-    if (!users) {
-      return Promise.resolve([])
-    }
-    return Promise.resolve([users])
+  async findByRoleAdmin(): Promise<User[] | null> {
+    // const user = this.items.filter((item) => item.role === "ADMIN")
+    // if (!user) {
+    //   return null
+    // }
+    // // console.log(user)
+    // return user
+    // return this.items.filter((item) => item.role === "ADMIN");
+    // return this.items.filter((item) => item.role === "ADMIN");
+
+    return this.items.filter((item) => item.role.toUpperCase() === "ADMIN");
+
   }
 
   async findById(id: string): Promise<User | null> {
@@ -55,7 +62,7 @@ export class InMemoryUsersRepository implements UsersRepository {
       email: data.email,
       password_hash: data.password_hash,
       created_at: new Date(),
-      role: 'USER' as Role // Default role or adjust as needed
+      role: data.role as Role // Default role or adjust as needed
     }
     this.items.push(user)
     return user
