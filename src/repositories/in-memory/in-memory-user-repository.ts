@@ -10,9 +10,6 @@ export class InMemoryUsersRepository implements UsersRepository {
     throw new Error("Method not implemented.")
   }
 
-  delete(_id: string): Promise<void> {
-    throw new Error("Method not implemented.")
-  }
 
   async findAll(): Promise<User[]> {
 
@@ -53,6 +50,15 @@ export class InMemoryUsersRepository implements UsersRepository {
     }
 
     return user
+  }
+
+  async delete(id: string): Promise<void> {
+    const userIndex = this.items.findIndex((item) => item.id === id)
+
+    if (userIndex === -1) {
+      throw new Error("User not found")
+    }
+    this.items.splice(userIndex, 1)
   }
 
   async create(data: Prisma.UserCreateInput) {
