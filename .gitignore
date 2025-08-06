@@ -7,3 +7,11 @@ anotacoes/
 coverage
 .vscode
 .scannerwork/
+
+
+# Ignore Docker files
+Docker/
+Docker/volumes
+
+# Ignore Docs
+Docs/
