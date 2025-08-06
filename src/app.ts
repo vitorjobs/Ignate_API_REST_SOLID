@@ -7,6 +7,7 @@ import { usersRoutes } from "http/controllers/users/routes";
 import { appRoutes } from "http/routes";
 import { ZodError } from "zod";
 import fastifyCookie from '@fastify/cookie'
+import { setupMetrics } from "lib/metrics";
 
 export const app = fastify()
 
@@ -64,6 +65,7 @@ app.register(gymsRoutes)
 app.register(checkInsRoutes)
 app.register(appRoutes)
 app.register(fastifyCookie)
+setupMetrics(app);
 // FUNÇÃO GLOBAL PARA TARTAR ERROS NA APLICAÇÃO
 
 app.setErrorHandler((error, _request, reply) => {
