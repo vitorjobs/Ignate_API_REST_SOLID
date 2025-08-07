@@ -6,8 +6,31 @@ import { UsersRepository } from "repositories/users-repository"
 export class InMemoryUsersRepository implements UsersRepository {
   public items: User[] = []
 
-  updateRole(_userId: string, _role: Role): Promise<User> {
-    throw new Error("Method not implemented.")
+  updateRole(userId: string, role: Role): Promise<User> {
+    /**
+     * This method is not implemented in the in-memory repository.
+     * It should be implemented in a real repository that interacts with a database.
+     * For the in-memory repository, we can simulate the update by finding the user and changing their role.  
+     * @param _userId - The ID of the user to update.
+     * @param _role - The new role to assign to the user. 
+     */
+    const userIndex = this.items.findIndex((item) => item.id === userId);
+
+    if (userIndex === -1) {
+      throw new Error("User not found");
+    }
+
+    // Create a copy of the user with the updated role
+    const updatedUser = {
+      ...this.items[userIndex],
+      role: role
+    };
+
+    // Update the array with the new user
+    this.items[userIndex] = updatedUser;
+
+    // Return the updated user (wrapped in a Promise to match the signature)
+    return Promise.resolve(updatedUser);
   }
 
 
