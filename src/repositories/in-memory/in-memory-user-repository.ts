@@ -7,13 +7,7 @@ export class InMemoryUsersRepository implements UsersRepository {
   public items: User[] = []
 
   updateRole(userId: string, role: Role): Promise<User> {
-    /**
-     * This method is not implemented in the in-memory repository.
-     * It should be implemented in a real repository that interacts with a database.
-     * For the in-memory repository, we can simulate the update by finding the user and changing their role.  
-     * @param _userId - The ID of the user to update.
-     * @param _role - The new role to assign to the user. 
-     */
+    // Find the user by ID
     const userIndex = this.items.findIndex((item) => item.id === userId);
 
     if (userIndex === -1) {
