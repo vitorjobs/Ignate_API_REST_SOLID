@@ -9,6 +9,7 @@ import { refresh } from "./refresh";
 // import { verifyUserRole } from "http/middlewares/verify-user-role";
 // import { deleted } from "./delete";
 import { getAll } from "./get-all";
+import { update } from "./update";
 // import { listAdminUsers } from "./get-admin-users";
 
 
@@ -16,6 +17,7 @@ export async function usersRoutes(app: FastifyInstance) {
   app.post('/sessions', authenticate)
   app.post('/users', register)
   app.get('/me', { onRequest: [verifyJwt] }, profile)
+  app.patch('/users/role', update)
   app.patch('/token/refresh', refresh)
   // app.patch('/users/role',
   //   { onRequest: [verifyJwt, verifyUserRole('ADMIN')] },
