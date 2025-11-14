@@ -28,5 +28,6 @@ export async function usersRoutes(app: FastifyInstance) {
   //   deleted,
   // )
   app.get('/users', { onRequest: [verifyJwt] }, getAll)
+  app.get('/users/admin', { onRequest: [verifyJwt] }, getAll)
   // app.get('/users/admin', { onRequest: [verifyJwt, verifyUserRole('ADMIN')] }, listAdminUsers)
 }

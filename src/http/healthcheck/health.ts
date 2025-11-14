@@ -1,8 +1,10 @@
+// import { app } from "app";
 import { env } from "env";
 import { FastifyReply, FastifyRequest } from "fastify";
+// import { setupMetrics } from "lib/metrics";
 
 export async function healthcheck(request: FastifyRequest, reply: FastifyReply) {
-
+  // setupMetrics(app);
   return reply.status(200).send({
     Version: '1.0',
     Status: 'OK',
